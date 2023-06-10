@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import numpy as np
-from gensim.models import KeyedVectors # type: ignore[import]
+from gensim.models import KeyedVectors  # type: ignore[import]
 from numpy import ndarray
 
 
@@ -14,7 +14,7 @@ class EmbeddingVectors:
         for index, word in enumerate(vocabulary):
             try:
                 vectors[index, :] = model[word]
-            except KeyError:  # word not in embedding file
+            except KeyError:    # word not in embedding file
                 vectors[index, :] = np.random.rand(model.vector_size)
                 word_index += 1
             except AttributeError:

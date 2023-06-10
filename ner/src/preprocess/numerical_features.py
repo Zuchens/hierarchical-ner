@@ -21,5 +21,5 @@ class NumericalFeatures:
         return [[
             self.starts_uppercase(word.word),
             self.has_dot(word.word),
-            self.has_num(word.word)
+            self.has_num(word.word),
         ] for word in tokens]

@@ -6,6 +6,7 @@ from ner.src.preprocess.numerical_features import NumericalFeatures
 
 
 class NumericalFeaturesTestCase(TestCase):
+
     def test_starts_uppercase_true(self):
         # GIVEN-WHEN-THEN
         self.assertEqual(NumericalFeatures.starts_uppercase("Uppercase"), 2)
@@ -40,7 +41,8 @@ class NumericalFeaturesTestCase(TestCase):
         numerical_features.has_num = Mock()
         numerical_features.has_num.return_value = 3
 
-        tokens = [Word(word="first", word_offset=0), Word(word="word", word_offset=7)]
+        tokens = [Word(word="first", word_offset=0,word_embedding_idx=1),
+                  Word(word="word", word_offset=7,word_embedding_idx=2)]
         expected_output = [[1, 2, 3], [1, 2, 3]]
         # WHEN
         result = numerical_features.create_additional_features(tokens)

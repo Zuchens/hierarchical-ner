@@ -2,7 +2,6 @@ from collections import defaultdict
 from typing import Any
 
 from ner.src.common.constants import Constants
-from ner.src.common.preprocessed.document import Document
 
 RawTargetType = list[dict[str, Any]]
 LabeledTargetType = set[str]
@@ -14,19 +13,18 @@ class OutputProcessor:
         self.labels = labels or {Constants.pad_label: 0}
         self.label_to_idx_iterator = len(self.labels)
 
-    def get_targets_idx(self, documents: list[Document]) -> list[list[int]]:
-        targets = [document.raw_document.entities for document in documents]
-        target_labels = self.get_target_label_lists(targets)
+    def get_targets_idx(self, entities) -> list[list[int]]:
+        target_labels = self.get_target_label_lists(entities)
         target_idx = self.convert_concatenated_labels_to_indices(target_labels)
         return target_idx
 
     def convert_concatenated_labels_to_indices(self, targets: list[list[set[str]]]) -> list[list[int]]:
         targets_idx: list[list[int]] = []
-        target_to_idx = defaultdict(int)
-        for idx, sentence_targets in enumerate(targets):
+        target_to_idx: dict[str,int] = defaultdict(int)
+        for _, sentence_targets in enumerate(targets):
             sentence_target_idx: list[int] = []
-            for word_target in sentence_targets:
-                word_target = sorted(set(word_target))
+            for word_target_set in sentence_targets:
+                word_target = sorted(word_target_set)
                 concatenated_label = "-".join(word_target)
                 if concatenated_label not in self.labels:
                     self.labels[concatenated_label] = self.label_to_idx_iterator

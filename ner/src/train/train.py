@@ -1,5 +1,5 @@
-from keras.engine.functional import Functional # type: ignore[import]
-from sklearn.model_selection import train_test_split # type: ignore[import]
+from keras.engine.functional import Functional  # type: ignore[import]
+from sklearn.model_selection import train_test_split  # type: ignore[import]
 
 from ner.src.common.constants import ModelParameters
 from ner.src.common.embedding import Embedding
@@ -16,18 +16,14 @@ class Trainer:
     def __init__(self):
         self.train_processor = TrainFeaturesProcessor()
 
-    def train_and_eval(self, vocab: Embedding,
-                       preprocessed_data: PreprocessedData) -> None:
-        data_train, data_val = train_test_split(
-            preprocessed_data.processed_sentences,
-            test_size=ModelParameters.validation_size,
-            shuffle=True)
+    def train_and_eval(self, vocab: Embedding, preprocessed_data: PreprocessedData) -> None:
+        data_train, data_val = train_test_split(preprocessed_data.processed_sentences,
+                                                test_size=ModelParameters.validation_size,
+                                                shuffle=True)
         train_model_data = self.train_processor.prepare_data(data_train, preprocessed_data, vocab)
         model = self.train(train_model_data, vocab)
         val_model_data = self.train_processor.prepare_data(data_val, preprocessed_data, vocab)
-
-        idx_to_label = {idx: label for label, idx in preprocessed_data.label_to_idx.items()}
-        PostProcessor.test_validation(idx_to_label, val_model_data, model, vocab)
+        PostProcessor.test_validation(val_model_data, model)
 
     def train(self, train_model_data: ModelData, vocab: Embedding) -> Functional:
         vectors = vocab.vectors

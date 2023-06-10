@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Any, Optional
 
 from ner.src.preprocess.dependencies_processor import Dependency
 
@@ -8,16 +7,14 @@ from ner.src.preprocess.dependencies_processor import Dependency
 class Word:
     word_offset: int
     word: str
-    word_embedding_idx: Optional[int] = None
+    word_embedding_idx: int
 
 
 @dataclass
-class Sentence:
+class InputSentence:
     dependencies: list[Dependency]
     words: list[Word]
-    features: Optional[list[list[int]]] = None
-    targets: Optional[list[int]] = None
-    offsets: Optional[list[int]] = None
+    features: list[list[int]]
 
     def __repr__(self) -> str:
         return " ".join([word.word for word in self.words])
@@ -35,16 +32,22 @@ class Sentence:
         dependencies_labels_idx += [0 for _ in range(padding_size - len(self.dependencies))]
         return dependencies_labels_idx
 
-    def get_padded_features(self,  padding_size: int) -> list[list[int]]:
+    def get_padded_features(self, padding_size: int) -> list[list[int]]:
         features_number = len(self.features[0])
         features_idx = self.features[:padding_size]
         features_idx += [[0 for _ in range(features_number)] for _ in range(padding_size - len(self.features))]
         return features_idx
 
-    def get_padded_dependencies(self,  padding_size: int) -> list[int]:
+    def get_padded_dependencies(self, padding_size: int) -> list[int]:
         dependencies_idx = [int(dependency.dependency_idx) for dependency in self.dependencies][:padding_size]
         dependencies_idx += [0 for _ in range(padding_size - len(self.dependencies))]
         return dependencies_idx
+
+
+@dataclass
+class Sentence:
+    input: InputSentence
+    targets: list[int]
 
     def get_padded_target(self, padding_size: int) -> list[int]:
         targets = self.targets[:padding_size]

@@ -5,9 +5,9 @@ from typing import Any
 
 @dataclass
 class RawDocument:
-    offsets2Entities: dict[str, Any]
+    offsets2Entities: dict[str, Any]  # pylint: disable=invalid-name
     dependencies: list[list[str]]
-    dependencyLabels: list[list[str]]
+    dependencyLabels: list[list[str]]  # pylint: disable=invalid-name
     entities: list[list[dict[str, Any]]]
     tokens: list[str]
     text: str

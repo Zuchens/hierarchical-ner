@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 from typing import Any
 
-from gensim.models import KeyedVectors # type: ignore[import]
+from gensim.models import KeyedVectors  # type: ignore[import]
 
 from ner.src.common.constants import Constants
 from ner.src.common.embedding import Embedding
@@ -17,8 +17,7 @@ class InvalidModelPathException(Exception):
 
 class EmbeddingCreator:
 
-    def load_embeddings(self, train_raw_data: list[dict[Any]],
-                        test_raw_data: list[dict[Any]]) -> Embedding:
+    def load_embeddings(self, train_raw_data: list[dict[str, Any]], test_raw_data: list[dict[str, Any]]) -> Embedding:
         # Creating vocab from train and test file
         vocabulary = Vocab().create_vocab(train_raw_data, test_raw_data)
         model = self.load_embedding_file(Constants.emb_path)
