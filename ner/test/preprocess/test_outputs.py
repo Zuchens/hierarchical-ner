@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from ner.src.common.constants import Constants
-from ner.src.preprocess.outputs import OutputProcessor
+from ner.src.preprocess.outputs import OutputProcessor, RawTargets
 
 
 class OutputProcessorTestCase(TestCase):
@@ -29,24 +29,24 @@ class OutputProcessorTestCase(TestCase):
 
     def test_get_sentence_target_labels(self) -> None:
         # GIVEN
-        raw_sentence_targets = [[],
-                                [{
-                                    "type": "person",
-                                    "offsets": [{
-                                        "from": 1,
-                                        "to": 3
-                                    }, {
-                                        "from": 2,
-                                        "to": 3
-                                    }]
-                                }, {
-                                    "type": "person",
-                                    "subtype": "firstname",
-                                    "offsets": [{
-                                        "from": 1,
-                                        "to": 3
-                                    }]
-                                }], []]
+        raw_sentence_targets: RawTargets = [[],
+                                            [{
+                                                "type": "person",
+                                                "offsets": [{
+                                                    "from": 1,
+                                                    "to": 3
+                                                }, {
+                                                    "from": 2,
+                                                    "to": 3
+                                                }]
+                                            }, {
+                                                "type": "person",
+                                                "subtype": "firstname",
+                                                "offsets": [{
+                                                    "from": 1,
+                                                    "to": 3
+                                                }]
+                                            }], []]
         expected_output = [{Constants.outside_label}, {"person", "person_firstname"}, {"person"}]
 
         # WHEN
