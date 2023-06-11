@@ -2,13 +2,16 @@ from ner.src.common.sentence import InputSentence
 from ner.src.preprocess.outputs import OutputProcessor, RawTargetType
 
 ProcessedTargetType = list[int]
+ProcessedTargets = list[ProcessedTargetType]
+
+
 class TargetsProcessor:
 
-    def __init__(self, label2idx=None):
-        self.output_processor = OutputProcessor(label2idx)
+    def __init__(self, label_to_idx=None):
+        self.output_processor = OutputProcessor(label_to_idx)
 
     def get_targets_by_sentences(self, input_documents: list[list[InputSentence]],
-                                 entities: list[RawTargetType]) -> list[list[ProcessedTargetType]]:
+                                 entities: list[RawTargetType]) -> list[ProcessedTargets]:
         output_indexes_by_document = self.output_processor.get_targets_idx(entities)
         document_targets = []
         for document, output_per_document in zip(input_documents, output_indexes_by_document):
@@ -19,7 +22,7 @@ class TargetsProcessor:
         self,
         input_sentences: list[InputSentence],
         output_indexes_by_document: list[int],
-    ) -> list[list[int]]:
+    ) -> ProcessedTargets:
         target_sentences = []
         target_word_index = 0
         for sentence in input_sentences:

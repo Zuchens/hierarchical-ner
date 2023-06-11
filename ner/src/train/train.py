@@ -1,5 +1,5 @@
-from keras.engine.functional import Functional  # type: ignore[import]
-from sklearn.model_selection import train_test_split  # type: ignore[import]
+from keras.engine.functional import Functional    # type: ignore[import]
+from sklearn.model_selection import train_test_split    # type: ignore[import]
 
 from ner.src.common.constants import ModelParameters
 from ner.src.common.embedding import Embedding
@@ -8,7 +8,7 @@ from ner.src.postprocessing.post_processor import PostProcessor
 from ner.src.preprocess.preprocess import PreprocessedData
 from ner.src.train.model_feature_processor import TrainFeaturesProcessor
 from ner.src.train.models.flat_rnn_model import NERClassifier
-from ner.src.train.visualization import Visualization
+from ner.src.train.train_visualization import TrainVisualization
 
 
 class Trainer:
@@ -38,5 +38,5 @@ class Trainer:
                             validation_split=ModelParameters.validation_size,
                             verbose=2)
 
-        Visualization.plot_history(history)
+        TrainVisualization.plot_history(history)
         return model

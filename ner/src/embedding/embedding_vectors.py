@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import numpy as np
-from gensim.models import KeyedVectors  # type: ignore[import]
+from gensim.models import KeyedVectors    # type: ignore[import]
 from numpy import ndarray
 
 

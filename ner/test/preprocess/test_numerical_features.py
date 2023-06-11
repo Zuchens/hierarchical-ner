@@ -41,8 +41,10 @@ class NumericalFeaturesTestCase(TestCase):
         numerical_features.has_num = Mock()
         numerical_features.has_num.return_value = 3
 
-        tokens = [Word(word="first", word_offset=0,word_embedding_idx=1),
-                  Word(word="word", word_offset=7,word_embedding_idx=2)]
+        tokens = [
+            Word(word="first", word_offset=0, word_embedding_idx=1),
+            Word(word="word", word_offset=7, word_embedding_idx=2)
+        ]
         expected_output = [[1, 2, 3], [1, 2, 3]]
         # WHEN
         result = numerical_features.create_additional_features(tokens)

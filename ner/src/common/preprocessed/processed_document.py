@@ -21,12 +21,12 @@ class ProcessedDocument:
 
 
 class InputProcessor:
-    @classmethod
+
     def get_sentences(
-            cls,
-            raw_document: RawDocument,
-            dependencies_processor: DependenciesProcessor,
-            embeddings: Embedding,
+        self,
+        raw_document: RawDocument,
+        dependencies_processor: DependenciesProcessor,
+        embeddings: Embedding,
     ) -> list[InputSentence]:
         # the sentence splitting was done during external model in dependency parsing
         # therefore we align sentences to match split in dependencies
@@ -35,15 +35,14 @@ class InputProcessor:
         for sentence_dependencies, sentence_dependency_labels in raw_document.dependencies_with_labels:
             sentence_size = len(sentence_dependencies)
             dependencies = dependencies_processor.set_dependencies(sentence_dependencies, sentence_dependency_labels)
-            words = cls.align_words_to_sentences(raw_document, sentence_size, word_index, embeddings.vocabulary)
+            words = self.align_words_to_sentences(raw_document, sentence_size, word_index, embeddings.vocabulary)
             features = NumericalFeatures().create_additional_features(words)
-            # assert len(raw_doc["entities"]) == len(raw_doc["tokens"])
+            assert len(raw_document.entities) == len(raw_document.tokens), "Labels do not match tokens"
             sentence = InputSentence(dependencies=dependencies, words=words, features=features)
             sentences.append(sentence)
         return sentences
 
-    @staticmethod
-    def align_words_to_sentences(doc: RawDocument, sentence_size: int, word_idx: WordIndex,
+    def align_words_to_sentences(self, doc: RawDocument, sentence_size: int, word_idx: WordIndex,
                                  word_to_index: dict[str, int]) -> list[Word]:
         words = []
         for _ in range(sentence_size):

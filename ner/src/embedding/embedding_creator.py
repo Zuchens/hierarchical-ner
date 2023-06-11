@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 from typing import Any
 
-from gensim.models import KeyedVectors  # type: ignore[import]
+from gensim.models import KeyedVectors    # type: ignore[import]
 
 from ner.src.common.constants import Constants
 from ner.src.common.embedding import Embedding

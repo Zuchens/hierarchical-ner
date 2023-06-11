@@ -4,6 +4,7 @@ from typing import Any
 from ner.src.common.constants import Constants
 
 RawTargetType = list[dict[str, Any]]
+RawTargets = list[RawTargetType]
 LabeledTargetType = set[str]
 
 
@@ -20,7 +21,7 @@ class OutputProcessor:
 
     def convert_concatenated_labels_to_indices(self, targets: list[list[set[str]]]) -> list[list[int]]:
         targets_idx: list[list[int]] = []
-        target_to_idx: dict[str,int] = defaultdict(int)
+        target_to_idx: dict[str, int] = defaultdict(int)
         for _, sentence_targets in enumerate(targets):
             sentence_target_idx: list[int] = []
             for word_target_set in sentence_targets:
@@ -34,10 +35,10 @@ class OutputProcessor:
             targets_idx.append(sentence_target_idx)
         return targets_idx
 
-    def get_target_label_lists(self, document_targets: list[list[RawTargetType]]) -> list[list[LabeledTargetType]]:
+    def get_target_label_lists(self, document_targets: list[RawTargets]) -> list[list[LabeledTargetType]]:
         return [self.get_sentence_target_labels(sentence_targets) for sentence_targets in document_targets]
 
-    def get_sentence_target_labels(self, raw_sentence_targets: list[RawTargetType]) -> list[LabeledTargetType]:
+    def get_sentence_target_labels(self, raw_sentence_targets: RawTargets) -> list[LabeledTargetType]:
         sentence_target_labels: list[set[str]] = [set() for _ in range(len(raw_sentence_targets))]
         for idx, targets in enumerate(raw_sentence_targets):
             if len(targets) > 0:

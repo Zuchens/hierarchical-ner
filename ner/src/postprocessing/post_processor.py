@@ -1,4 +1,4 @@
-from keras.engine.functional import Functional  # type: ignore[import]
+from keras.engine.functional import Functional    # type: ignore[import]
 
 from ner.src.common.model.model_data import ModelData
 

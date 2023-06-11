@@ -1,14 +1,14 @@
-from keras.callbacks import History  # type: ignore[import]
-from matplotlib import pyplot as plt   # type: ignore[import]
+from keras.callbacks import History    # type: ignore[import]
+from matplotlib import pyplot as plt    # type: ignore[import]
 
 
-class Visualization:
+class TrainVisualization:
 
     @staticmethod
     def plot_history(history: History) -> None:
         print(history.history.keys())
-        Visualization.plot_accuracy(history)
-        Visualization.plot_loss(history)
+        TrainVisualization.plot_accuracy(history)
+        TrainVisualization.plot_loss(history)
 
     @staticmethod
     def plot_loss(history: History) -> None:
@@ -21,7 +21,7 @@ class Visualization:
         plt.savefig('loss.png')
 
     @staticmethod
-    def plot_accuracy(history: History):
+    def plot_accuracy(history: History) -> None:
         plt.plot(history.history['accuracy'])
         plt.plot(history.history['val_accuracy'])
         plt.title('model accuracy')

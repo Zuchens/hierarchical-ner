@@ -1,0 +1,125 @@
+{
+  "offsets2Entities": {
+    "0": [],
+    "10": [],
+    "19": [
+      {
+        "type": "persName",
+        "text": "Paźniewskiego",
+        "offsets": [
+          {
+            "to": 32,
+            "from": 19
+          }
+        ]
+      },
+      {
+        "type": "persName",
+        "text": "Paźniewskiego",
+        "subtype": "surname",
+        "offsets": [
+          {
+            "to": 32,
+            "from": 19
+          }
+        ]
+      }
+    ],
+    "33": [],
+    "38": [],
+    "44": [],
+    "46": [
+      {
+        "type": "placeName",
+        "text": "Krzemieniec",
+        "subtype": "settlement",
+        "offsets": [
+          {
+            "to": 57,
+            "from": 46
+          }
+        ]
+      }
+    ],
+    "57": []
+  },
+  "dependencies": [
+    [
+      "3",
+      "3",
+      "3",
+      "-1",
+      "2",
+      "6",
+      "4",
+      "3"
+    ]
+  ],
+  "dependencyLabels": [
+    [
+      "pd",
+      "adjunct",
+      "pd",
+      "root",
+      "app",
+      "punct",
+      "app",
+      "punct"
+    ]
+  ],
+  "entities": [
+    [],
+    [],
+    [
+      {
+        "type": "persName",
+        "text": "Paźniewskiego",
+        "offsets": [
+          {
+            "to": 32,
+            "from": 19
+          }
+        ]
+      },
+      {
+        "type": "persName",
+        "text": "Paźniewskiego",
+        "subtype": "surname",
+        "offsets": [
+          {
+            "to": 32,
+            "from": 19
+          }
+        ]
+      }
+    ],
+    [],
+    [],
+    [],
+    [
+      {
+        "type": "placeName",
+        "text": "Krzemieniec",
+        "subtype": "settlement",
+        "offsets": [
+          {
+            "to": 57,
+            "from": 46
+          }
+        ]
+      }
+    ],
+    []
+  ],
+  "tokens": [
+    "Bohaterem",
+    "powieści",
+    "Paźniewskiego",
+    "jest",
+    "miasto",
+    ",",
+    "Krzemieniec",
+    "."
+  ],
+  "text": "Bohaterem powieści Paźniewskiego jest miasto, Krzemieniec. "
+}

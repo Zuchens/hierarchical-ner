@@ -1,6 +1,6 @@
 # pylint: disable=import-error
-from keras.utils import plot_model  # type: ignore[import]
-from tensorflow.keras import Input, Model  # type: ignore[import]
+from keras.utils import plot_model    # type: ignore[import]
+from tensorflow.keras import Input, Model    # type: ignore[import]
 from tensorflow.keras.layers import Embedding, Concatenate  # type: ignore[import]  # yapf: disable
 from tensorflow.keras.layers import Masking, Dropout, Bidirectional  # type: ignore[import] # yapf: disable
 from tensorflow.keras.layers import TimeDistributed, Dense, GRU  # type: ignore[import]  # yapf: disable
@@ -10,9 +10,9 @@ from ner.src.common.constants import ModelParameters
 
 class NERClassifier:
 
-    def create_model(self, embeddings, emb_features, feature_size, output_size):  # pylint: disable=too-many-locals
+    def create_model(self, embeddings, emb_features, feature_size, output_size):    # pylint: disable=too-many-locals
         features = Input(shape=(ModelParameters.padding, feature_size), name='words')
-        embedding_input = Input(shape=(ModelParameters.padding), name='embedding_input')
+        embedding_input = Input(shape=ModelParameters.padding, name='embedding_input')
         embedding = Embedding(embeddings.shape[0],
                               emb_features,
                               input_length=ModelParameters.padding,

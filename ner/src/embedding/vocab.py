@@ -1,5 +1,7 @@
 from typing import Any
 
+from ner.src.common.constants import Constants
+
 
 class Vocab:
 
@@ -11,7 +13,7 @@ class Vocab:
                     vocabulary[word.lower()] = len(vocabulary)
 
     def create_vocab(self, train_raw_data: list[dict[str, Any]], test_raw_data: list[dict[str, Any]]) -> dict[str, int]:
-        vocabulary = {'PAD': 0, 'UNKNOWN': 1}
+        vocabulary = {Constants.pad_word: 0, Constants.unknown_word: 1}
         self.add_words_to_vocabulary(vocabulary, train_raw_data)
         self.add_words_to_vocabulary(vocabulary, test_raw_data)
         return vocabulary
