@@ -4,7 +4,7 @@ class Constants:
     outside_label: str = "Outside"
     pad_label: str = "P"
     use_test_file = False
-    emb_path: str = "data/embedding/small/small"
+    emb_path: str = "data/embedding/embedding-sample"
 
 
 class ModelParameters:

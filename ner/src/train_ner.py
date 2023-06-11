@@ -28,8 +28,7 @@ if __name__ == "__main__":
     parser.add_argument('--train',
                         type=str,
                         help='train dataset file path',
-                        default="data/input_data/train/out-small-2.json")
-    parser.add_argument('--test', type=str, help='test dataset file path', default="data/test_data/results.json")
-    parser.add_argument('--out', type=str, help='train output file path', default="data/output_data/train_file.txt")
+                        default="data/input_data/train/train-sample.json")
+    parser.add_argument('--test', type=str, help='test dataset file path', default="data/test_data/test-sample.json")
     arguments = parser.parse_args()
     main(arguments)

@@ -11,7 +11,7 @@ Original code available at: https://github.com/Zuchens/ner_poleval
 
 To train and eval the model: 
 ```commandline
-
+python train_ner.py
 ```
 
 To install:
