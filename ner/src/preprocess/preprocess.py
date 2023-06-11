@@ -50,6 +50,8 @@ class Preprocessor:
         for processed_input, target in zip(processed_inputs, document_targets):
             sentences = []
             for input_sentence, target_sentence in zip(processed_input, target):
+                if len(input_sentence.words) == 0:
+                    continue
                 sentences.append(Sentence(input_sentence, target_sentence))
             processed_documents.append(ProcessedDocument(sentences))
         return processed_documents

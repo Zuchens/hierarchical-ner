@@ -28,6 +28,8 @@ class EmbeddingCreator:
     def load_embedding_file(embeddings_path: str) -> KeyedVectors:
         if os.path.isfile(f"{embeddings_path}.model"):
             model = KeyedVectors.load(f"{embeddings_path}.model")
+        elif os.path.isfile(f"{embeddings_path}.txt"):
+            model = KeyedVectors.load_word2vec_format(f"{embeddings_path}.txt")
         elif os.path.isfile(f"{embeddings_path}.vec"):
             model = KeyedVectors.load_word2vec_format(f"{embeddings_path}.vec")
         else:
